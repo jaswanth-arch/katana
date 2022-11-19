@@ -15,7 +15,8 @@ RUN apt-get update -qq \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Gem complained unless you bootstrapped rdoc first. I don't know why.
-RUN gem install rdoc --no-document
+RUN apt-get update && apt-get install -y ruby ruby-dev ruby-bundler build-essential
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN gem install zsteg
 
 # Compile and install npiet
